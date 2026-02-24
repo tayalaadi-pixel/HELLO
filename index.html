@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Birthday Checker</title>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #141e30, #243b55);
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+            text-align: center;
+            margin-top: 150px;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 40px;
+            border-radius: 15px;
+            width: 350px;
+            margin: auto;
+            box-shadow: 0px 0px 20px rgba(0,0,0,0.6);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 12px;
+            width: 80%;
+            font-size: 16px;
+            border-radius: 8px;
+            border: none;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: none;
+            background-color: #00ffcc;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #00ccaa;
+        }
+
+        #result {
+            margin-top: 25px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>🎂 Birthday Checker</h1>
+
+        <input type="number" id="age" placeholder="Enter your age">
+        <br>
+        <button onclick="checkAge()">Submit</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function checkAge() {
+            const age = document.getElementById("age").value;
+            const result = document.getElementById("result");
+
+            if (age === "") {
+                result.innerText = "Please enter your age.";
+                return;
+            }
+
+            if (age < 18) {
+                result.innerText = "bacchi bhaag ja idhar se";
+            } else {
+                result.innerText = "HAPPY BIRTHDAY ASSHAT 🎉";
+            }
+        }
+    </script>
+
+</body>
+</html>
