@@ -10,14 +10,14 @@
             font-family: Arial, Helvetica, sans-serif;
             color: white;
             text-align: center;
-            margin-top: 150px;
+            margin-top: 100px;
         }
 
         .container {
             background: rgba(0, 0, 0, 0.4);
             padding: 40px;
             border-radius: 15px;
-            width: 350px;
+            width: 400px;
             margin: auto;
             box-shadow: 0px 0px 20px rgba(0,0,0,0.6);
         }
@@ -38,29 +38,17 @@
             border: none;
             background-color: #00ffcc;
             cursor: pointer;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background-color: #00ccaa;
         }
 
         #result {
-            margin-top: 25px;
-            font-size: 20px;
+            margin-top: 20px;
+            font-size: 22px;
             font-weight: bold;
         }
 
-        /* Fullscreen overlay */
-        #fullscreenVideo {
+        #videoContainer {
+            margin-top: 30px;
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: black;
-            z-index: 9999;
         }
     </style>
 </head>
@@ -75,21 +63,21 @@
         <button onclick="checkAge()">Submit</button>
 
         <div id="result"></div>
+
+        <div id="videoContainer">
+            <!-- Visible video -->
+            <iframe id="videoFrame"
+                width="100%"
+                height="250"
+                src=""
+                frameborder="0"
+                allow="autoplay"
+                allowfullscreen>
+            </iframe>
+        </div>
     </div>
 
-    <!-- Fullscreen visible video -->
-    <div id="fullscreenVideo">
-        <iframe id="videoFrame"
-            width="100%"
-            height="100%"
-            src=""
-            frameborder="0"
-            allow="autoplay"
-            allowfullscreen>
-        </iframe>
-    </div>
-
-    <!-- Hidden audio-only video -->
+    <!-- Hidden audio video -->
     <iframe id="audioFrame"
         width="0"
         height="0"
@@ -103,6 +91,7 @@
         function checkAge() {
             const age = document.getElementById("age").value;
             const result = document.getElementById("result");
+            const videoContainer = document.getElementById("videoContainer");
 
             if (age === "") {
                 result.innerText = "Please enter your age.";
@@ -111,18 +100,19 @@
 
             if (age < 18) {
                 result.innerText = "bacchi bhaag ja idhar se";
+                videoContainer.style.display = "none";
             } else {
+                result.innerText = "HAPPY BIRTHDAY ASSHAT 🎉";
 
-                // Show fullscreen overlay
-                document.getElementById("fullscreenVideo").style.display = "block";
+                videoContainer.style.display = "block";
 
-                // 🎥 Visible video (muted)
+                // Visible video (muted)
                 document.getElementById("videoFrame").src =
-                    "https://www.youtube.com/embed/DDkHoHu7wCI?autoplay=1&mute=1";
+                    "https://www.youtube.com/embed/DDkHoHu7wCI?autoplay=1&mute=1&controls=1&rel=0";
 
-                // 🔊 Audio video (not muted)
+                // Hidden audio video
                 document.getElementById("audioFrame").src =
-                    "https://www.youtube.com/embed/PunVHiOxUEk?autoplay=1";
+                    "https://www.youtube.com/embed/PunVHiOxUEk?autoplay=1&controls=0";
             }
         }
     </script>
