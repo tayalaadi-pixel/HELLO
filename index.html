@@ -22,10 +22,6 @@
             box-shadow: 0px 0px 20px rgba(0,0,0,0.6);
         }
 
-        h1 {
-            margin-bottom: 20px;
-        }
-
         input {
             padding: 12px;
             width: 80%;
@@ -54,6 +50,18 @@
             font-size: 20px;
             font-weight: bold;
         }
+
+        /* Fullscreen video overlay */
+        #fullscreenVideo {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 9999;
+        }
     </style>
 </head>
 
@@ -69,6 +77,28 @@
         <div id="result"></div>
     </div>
 
+    <!-- Fullscreen visible video -->
+    <div id="fullscreenVideo">
+        <iframe id="videoFrame"
+            width="100%"
+            height="100%"
+            src=""
+            frameborder="0"
+            allow="autoplay"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <!-- Hidden audio-only video -->
+    <iframe id="audioFrame"
+        width="0"
+        height="0"
+        style="display:none;"
+        src=""
+        frameborder="0"
+        allow="autoplay">
+    </iframe>
+
     <script>
         function checkAge() {
             const age = document.getElementById("age").value;
@@ -82,7 +112,17 @@
             if (age < 18) {
                 result.innerText = "bacchi bhaag ja idhar se";
             } else {
-                result.innerText = "HAPPY BIRTHDAY ASSHAT 🎉";
+
+                // Show fullscreen overlay
+                document.getElementById("fullscreenVideo").style.display = "block";
+
+                // 🎥 Visible video (MUTED)
+                document.getElementById("videoFrame").src =
+                    "https://www.youtube.com/embed/PunVHiOxUEk?autoplay=1&mute=1";
+
+                // 🔊 Audio video (NOT muted)
+                document.getElementById("audioFrame").src =
+                    "https://www.youtube.com/embed/VIDEO_ID_2?autoplay=1&start=30";
             }
         }
     </script>
